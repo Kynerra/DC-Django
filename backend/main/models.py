@@ -36,10 +36,6 @@ class Episode(models.Model):
     number = models.IntegerField('Number', unique=True)
 
 
-    def __str__(self) -> str:
-        return self.title
-
-
 class Comment(models.Model):
     text = models.TextField('Comment')
     date = models.DateTimeField('Comment Date', auto_now_add=True)

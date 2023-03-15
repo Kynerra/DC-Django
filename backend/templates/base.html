@@ -39,8 +39,8 @@
                 <div class="row">
                     <div class="col-lg-2">
                         <div class="header__logo">
-                            <a href="./index.html">
-                                <img src="img/logo.png" alt="">
+                            <a href="{% url 'index_url' %}">
+                                <img src="{% static 'img/logo.png' %}" alt="">
                             </a>
                         </div>
                     </div>
@@ -58,8 +58,7 @@
                                             <li><a href="./signup.html">Sign Up</a></li>
                                             <li><a href="./login.html">Login</a></li>
                                         </ul>
-                                    </li>
-                                    <li><a href="#">Contacts</a></li>
+                                    </li>ex
                                 </ul>
                             </nav>
                         </div>
@@ -67,7 +66,6 @@
                     <div class="col-lg-2">
                         <div class="header__right">
                             <a href="#" class="search-switch"><span class="icon_search"></span></a>
-                            <a href="./login.html"><span class="icon_profile"></span></a>
                         </div>
                     </div>
                 </div>
@@ -88,16 +86,14 @@
         <div class="row">
             <div class="col-lg-3">
                 <div class="footer__logo">
-                    <a href="./index.html"><img src="img/logo.png" alt=""></a>
+                    <a href="{% url 'index_url' %}"><img src="{% static 'img/logo.png' %}" alt=""></a>
                 </div>
             </div>
             <div class="col-lg-6">
                 <div class="footer__nav">
                     <ul>
-                        <li class="active"><a href="./index.html">Homepage</a></li>
-                        <li><a href="./categories.html">Categories</a></li>
-                        <li><a href="./blog.html">Our Blog</a></li>
-                        <li><a href="#">Contacts</a></li>
+                        <li class="active"><a href="{% url 'index_url' %}">Homepage</a></li>
+                        <li><a href="">Categories</a></li>
                     </ul>
                 </div>
             </div>

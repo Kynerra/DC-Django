@@ -1,0 +1,138 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<!-- Breadcrumb Begin -->
+    <div class="breadcrumb-option">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb__links">
+                        <a href="{% url 'index_url' %}"><i class="fa fa-home"></i> Home</a>
+                        <a href="">Categories</a>
+                        <span>Trending now</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Breadcrumb End -->
+
+    <!-- Product Section Begin -->
+    <section class="product-page spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="product__page__content">
+
+                        <div class="row">
+                            {% for x in trending__products %}
+                            <div class="col-lg-4 col-md-6 col-sm-6">
+                                <div class="product__item">
+                                    <div class="product__item__pic set-bg" data-setbg="{{ x.image.url }}">
+                                        <div class="ep">{% if x.anime_type == 1 %}1 / 1{% else %}8 / 8{% endif %}</div>
+                                        <div class="comment"><i class="fa fa-comments"></i> {{ x.comments }}</div>
+                                        <div class="view"><i class="fa fa-eye"></i> {{ x.views }}</div>
+                                    </div>
+                                    <div class="product__item__text">
+                                        <ul>
+
+                                            {% for i in x.categories.all %}
+                                            <li>{{ i.name }}</li>
+                                            {% endfor %}
+
+                                        </ul>
+                                        <h5><a href="#">{{ x.title }}</a></h5>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="product__pagination">
+                        {% if pages.0 != 1 %}
+                        <a href="{% url 'trending_all_url' pages.0|add:'-1' %}"><i class="fa fa-angle-double-left"></i></a>
+                        {% endif %}
+                        {% for x in pages.1 %}
+                        <a href="{% url 'trending_all_url' x %}" class="{% if x == pages.0 %}current-page{% endif %}">{{ x }}</a>
+                        {% endfor %}
+                        {% if pages.0 != pages.2 %}
+                        <a href="{% url 'trending_all_url' pages.0|add:'+1' %}"><i class="fa fa-angle-double-right"></i></a>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-8">
+                    <div class="product__sidebar">
+                        <div class="product__sidebar__view">
+                            <div class="section-title">
+                                <h5>Top Views</h5>
+                            </div>
+                            <ul class="filter__controls">
+                                <li class="active" data-filter="*">Day</li>
+                                <li data-filter=".week">Week</li>
+                                <li data-filter=".month">Month</li>
+                                <li data-filter=".years">Years</li>
+                            </ul>
+                            <div class="filter__gallery">
+                                <div class="product__sidebar__view__item set-bg mix day years"
+                                data-setbg="{{ top__views.0.carousel.url }}">
+                                <div class="ep">{% if top__views.0.anime_type == 1 %}1 / 1{% else %}8 / 8{% endif %}</div>
+                                <div class="view"><i class="fa fa-eye"></i> {{ top__views.0.views }}</div>
+                                <h5><a href="{% url 'anime_detail_url' top__views.0.id %}">{{ top__views.0.title }}</a></h5>
+                            </div>
+                            <div class="product__sidebar__view__item set-bg mix month week"
+                            data-setbg="{{ top__views.1.carousel.url }}">
+                            <div class="ep">{% if top__views.1.anime_type == 1 %}1 / 1{% else %}8 / 8{% endif %}</div>
+                            <div class="view"><i class="fa fa-eye"></i> {{ top__views.1.views }}</div>
+                            <h5><a href="{% url 'anime_detail_url' top__views.1.id %}">{{ top__views.1.title }}</a></h5>
+                        </div>
+                        <div class="product__sidebar__view__item set-bg mix week years"
+                        data-setbg="{{ top__views.2.carousel.url }}">
+                        <div class="ep">{% if top__views.2.anime_type == 1%}1 / 1{% else %}8 / 8{% endif %}</div>
+                        <div class="view"><i class="fa fa-eye"></i> {{ top__views.2.views }}</div>
+                        <h5><a href="{% url 'anime_detail_url' top__views.2.id %}">{{ top__views.2.title }}</a></h5>
+                    </div>
+                    <div class="product__sidebar__view__item set-bg mix years month"
+                    data-setbg="{{ top__views.3.carousel.url }}">
+                    <div class="ep">{% if top__views.3.anime_type == 1 %}1 / 1{% else %}8 / 8{% endif %}</div>
+                    <div class="view"><i class="fa fa-eye"></i> {{ top__views.3.views }}</div>
+                    <h5><a href="{% url 'anime_detail_url' top__views.3.id %}">{{ top__views.3.title }}</a></h5>
+                </div>
+                <div class="product__sidebar__view__item set-bg mix day"
+                data-setbg="{{ top__views.4.carousel.url }}">
+                <div class="ep">{% if  top__views.4.anime_type == 1 %}1 / 1{% else %}8 / 8{% endif %}</div>
+                <div class="view"><i class="fa fa-eye"></i>  {{ top__views.4.views }}</div>
+                <h5><a href="{% url 'anime_detail_url' top__views.4.id %}">{{  top__views.4.title }}</a></h5>
+            </div>
+        </div>
+    </div>
+    {% if new__comment %}
+    <div class="product__sidebar__comment">
+        <div class="section-title">
+            <h5>New Comment</h5>
+        </div>
+        {% for x in new__comment %}
+        <div class="product__sidebar__comment__item">
+            <div class="product__sidebar__comment__item__pic">
+                <img src="{{ x.image.url }}" alt="{{ x.title }}">
+            </div>
+            <div class="product__sidebar__comment__item__text">
+                <ul>
+                    {% for i in x.cate %}
+                    <li>{{ i.name }}</li>
+                    {% endfor %}
+                </ul>
+                <h5><a href="{% url 'anime_detail_url' x.id %}">{{ x.title }}</a></h5>
+                <span><i class="fa fa-eye"></i> {{ x.views }} Viewes</span>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Product Section End -->
+
+{% endblock content %}
